@@ -14,6 +14,18 @@ createConnection({
     Product
   ],
   autoSchemaSync: true,
-}).then(connection => {
-  console.log(connection);
+}).then(async connection => {
+  var product = new Product();
+
+  product.description = "Soy Milk 5L";
+  product.price = 19.99;
+
+  let productRepository = connection.getRepository(Product);
+
+  await productRepository.persist(product);
+
+  let allProducts = await productRepository.find();
+
+  console.log(allProducts);
+
 }).catch(error => console.log(error));
