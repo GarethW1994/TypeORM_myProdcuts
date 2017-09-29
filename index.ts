@@ -11,21 +11,23 @@ createConnection({
     database: 'products'
   },
   entities: [
-    Product
+    __dirname + "/entity/*.js"
   ],
   autoSchemaSync: true,
 }).then(async connection => {
   var product = new Product();
 
-  product.description = "Soy Milk 5L";
-  product.price = 19.99;
+  // product.description = "Soy Milk 5L";
+  // product.price = 19.99;
 
   let productRepository = connection.getRepository(Product);
 
-  await productRepository.persist(product);
+  let updateProduct = await productRepository.findOneById({ id: 1 });
 
-  let allProducts = await productRepository.find();
+  updateProduct.description = "Soy Milk 2L";
 
-  console.log(allProducts);
+  await productRepository.persist(updateProduct);
+
+  console.log(updateProduct)
 
 }).catch(error => console.log(error));
