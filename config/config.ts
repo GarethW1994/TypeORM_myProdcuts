@@ -5,7 +5,7 @@ import Product from '../entities/Product';
 import { ConnectionOptions } from 'typeorm';
 
 
-export let dbConnection : ConnectionOptions = {
+export let connectionOptions : ConnectionOptions = {
     driver: {
         type: 'mysql',
         host: 'localhost',
@@ -13,8 +13,10 @@ export let dbConnection : ConnectionOptions = {
         password: '$G_Code1!',
         database: 'products'
     }, 
-    entities : [
-        __dirname + '../entities/*.js'
-    ],
-    autoSchemaSync: true,
+    logging: {
+        logQueries: true,
+        logFailedQueryError: true
+    },
+    autoSchemaSync: true,    
+    entities : [__dirname + '../entities/*.js']
 };
