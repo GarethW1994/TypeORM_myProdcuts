@@ -9,8 +9,7 @@ import { Product } from './entities/Product';
 
 var connection = createConnection(config.connectionOptions);
 
-connection.then(async connection=> {
-    connection.connect();
+connection.then(async connection => {
     console.log('connected to the database');
 });
 
