@@ -1,14 +1,15 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "lib": ["es5", "es6"],
         "target": "es6",
+        "module": "commonjs",
         "outDir": "./compiled",
+        "moduleResolution": "node",
         "emitDecoratorMetadata": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "sourceMap": true
     },
-    "files": [
-        "./index.ts",
-        "./entity/Product.ts",
-        "./database-queries/addEntity.ts"
-      ]
+    "exclude": [
+        "node_modules"
+    ]
 }

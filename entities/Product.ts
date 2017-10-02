@@ -1,13 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Product {
+
   @PrimaryGeneratedColumn()
   id: Number;
 
-  @Column({ length: 100 })
+  @Column()
   description: string;
 
-  @Column("float")
+  @Column()
   price: number;
 }

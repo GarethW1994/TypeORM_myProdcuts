@@ -1,16 +1,23 @@
-import { error } from 'util';
-import { connect } from 'tls';
 import 'reflect-metadata';
-import * as config from './config/config';
+import Config from './config/config';
 import { createConnection } from 'typeorm';
-import { Product } from './entities/Product';
+import { Product }  from "./entities/Product";
+import Routes from "./routes/routes";
+import * as express from "express";
+import * as bodyParser from "body-parser";
 
+var app = express();
 
+var port = 3100;
 
-var connection = createConnection(config.connectionOptions);
+app.get("/allProducts", Routes.getAll);
+app.get("/getProductID/:id", Routes.getProductID);
 
-connection.then(async connection => {
-    console.log('connected to the database');
-});
+var options = new Config();
 
-connection.catch(error);
+var ConnectionOptions = options.config();
+var connection = createConnection(ConnectionOptions);
+connection.then(async connection => { console.log('connected to the database') });
+connection.catch(Error);
+
+app.listen(port, () => console.log("Server running at http://localhost:" + port))
